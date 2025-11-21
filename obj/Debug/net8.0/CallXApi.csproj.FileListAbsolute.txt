@@ -1,5 +1,4 @@
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\appsettings.Development.json
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\appsettings.json
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\CallXApi.staticwebassets.endpoints.json
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\CallXApi.exe
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\CallXApi.deps.json
