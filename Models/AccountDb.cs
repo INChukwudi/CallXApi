@@ -206,9 +206,9 @@ namespace CallXApi.Models
             return user.password == encryptedPassword ? user.id : 0;
         }
 
-        public async Task<bool> CheckUsernameLogin(string username)
+        public async Task<bool> CheckAdminUsernameLogin(string username)
         {
-            if (await _context.users.AnyAsync(t => t.username == username.Trim()))
+            if (await _context.admin_users.AnyAsync(t => t.username == username.Trim()))
             {
                 return true;
             }
