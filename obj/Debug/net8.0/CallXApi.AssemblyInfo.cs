@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4bbdfbd7a63c406b3b56377e31e132402cc00206")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+08877cccc38475e2bca228fdc0f0f75864eb09d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
