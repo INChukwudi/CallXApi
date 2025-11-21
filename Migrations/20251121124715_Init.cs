@@ -13,7 +13,7 @@ namespace CallXApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Admin_Users",
+                name: "admin_users",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -34,11 +34,11 @@ namespace CallXApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Admin_Users", x => x.id);
+                    table.PrimaryKey("PK_admin_users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "New_Account_Otps",
+                name: "new_account_otps",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -49,11 +49,11 @@ namespace CallXApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_New_Account_Otps", x => x.id);
+                    table.PrimaryKey("PK_new_account_otps", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "users",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -74,7 +74,7 @@ namespace CallXApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.PrimaryKey("PK_users", x => x.id);
                 });
         }
 
@@ -82,13 +82,13 @@ namespace CallXApi.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Admin_Users");
+                name: "admin_users");
 
             migrationBuilder.DropTable(
-                name: "New_Account_Otps");
+                name: "new_account_otps");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "users");
         }
     }
 }

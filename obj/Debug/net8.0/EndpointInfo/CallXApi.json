@@ -178,11 +178,6 @@
       "Login": {
         "type": "object",
         "properties": {
-          "schoolId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
           "email": {
             "type": "string",
             "nullable": true
@@ -212,14 +207,6 @@
             "nullable": true
           },
           "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "memberId": {
-            "type": "string",
-            "nullable": true
-          },
-          "status": {
             "type": "string",
             "nullable": true
           }

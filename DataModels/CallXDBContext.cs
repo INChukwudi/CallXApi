@@ -28,9 +28,9 @@ namespace CallXApi.DataModels
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
-        public virtual DbSet<user> Users { get; set; }
-        public virtual DbSet<admin_user> Admin_Users { get; set; }
-        public virtual DbSet<new_account_otp> New_Account_Otps { get; set; }
+        public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<admin_user> admin_users { get; set; }
+        public virtual DbSet<new_account_otp> new_account_otps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql(remoteGres);

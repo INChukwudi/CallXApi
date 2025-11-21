@@ -114,7 +114,7 @@ namespace CallXApi.Models
             if (string.IsNullOrWhiteSpace(username))
                 return 0;
 
-            var count = await _context.Users
+            var count = await _context.users
                 .Where(s => s.username == username.Trim())
                 .LongCountAsync();
 
@@ -131,7 +131,7 @@ namespace CallXApi.Models
 
         public async Task<UserToken> AuthReg(int? userId)
         {
-            var userdata = await _context.Users.FindAsync(userId);
+            var userdata = await _context.users.FindAsync(userId);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -195,19 +195,20 @@ namespace CallXApi.Models
 
         public async Task<long> GetUserId(NpgsqlConnection conn, string email, string password)
         {
-            var user = await (from a in _context.Users where a.username == email select a).FirstOrDefaultAsync();
+            var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
             return user.password == password ? user.id : 0;
         }
 
-        public async Task<int> GetUserIdRegister(NpgsqlConnection conn, string email, string password)
+        public async Task<int> GetUserIdRegister(string email, string password)
         {
-            var user = await (from a in _context.Users where a.username == email select a).FirstOrDefaultAsync();
-            return user.password == password ? user.id : 0;
+            var encryptedPassword = Encrypt(password);
+            var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
+            return user.password == encryptedPassword ? user.id : 0;
         }
 
         public async Task<bool> CheckUsernameLogin(string username)
         {
-            if (await _context.Users.AnyAsync(t => t.username == username.Trim()))
+            if (await _context.users.AnyAsync(t => t.username == username.Trim()))
             {
                 return true;
             }
@@ -219,7 +220,7 @@ namespace CallXApi.Models
 
         public async Task<admin_user> GetUserStatus(string email)
         {
-            var user = await (from a in _context.Admin_Users where a.username == email.Trim() select a).FirstOrDefaultAsync();
+            var user = await (from a in _context.admin_users where a.username == email.Trim() select a).FirstOrDefaultAsync();
             return user;
         }
 

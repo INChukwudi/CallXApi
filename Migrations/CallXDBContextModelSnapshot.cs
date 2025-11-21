@@ -74,7 +74,7 @@ namespace CallXApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Admin_Users");
+                    b.ToTable("admin_users");
                 });
 
             modelBuilder.Entity("CallXApi.DataModels.new_account_otp", b =>
@@ -96,7 +96,7 @@ namespace CallXApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("New_Account_Otps");
+                    b.ToTable("new_account_otps");
                 });
 
             modelBuilder.Entity("CallXApi.DataModels.user", b =>
@@ -148,7 +148,7 @@ namespace CallXApi.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("users");
                 });
 #pragma warning restore 612, 618
         }
