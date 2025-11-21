@@ -141,19 +141,19 @@ namespace CallXApi
             try
             {
                 int? myuserId;
-                var isMember = await _account.CheckUser(model.email);
-                if (isMember > 0)
-                {
+                //var isMember = await _account.CheckUser(model.email);
+                //if (isMember == 0)
+                //{
                     using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
                     {
                         await conn.OpenAsync();
-                        var mycheck = await _account.CheckEmail(conn, model.email);
+                        var mycheck = await _account.CheckUser(model.email);
                         if (mycheck > 0)
                         {
                             return BadRequest(new { message = "This email has already been registered!" });
                         }
 
-                        string query = @"INSERT INTO Users (username, password, created, status) 
+                        string query = @"INSERT INTO users (username, password, created, status) 
                        VALUES(@username, @password, @created, @status)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
@@ -166,15 +166,15 @@ namespace CallXApi
 
                         await cmd.ExecuteNonQueryAsync();
 
-                        myuserId = await _account.GetUserIdRegister(conn, model.email, model.password);
+                        myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
 
                     }
                     return Ok(_account.AuthReg(myuserId));
-                }
-                else
-                {
-                    return BadRequest(new { message = "Member ID already registered!" });
-                }
+                //}
+                //else
+                //{
+                //    return BadRequest(new { message = "Member ID already registered!" });
+                //}
             }
             catch (Exception ex)
             {
