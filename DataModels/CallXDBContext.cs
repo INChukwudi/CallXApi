@@ -33,7 +33,7 @@ namespace CallXApi.DataModels
         public virtual DbSet<new_account_otp> New_Account_Otps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql(localGres);
+            => optionsBuilder.UseNpgsql(remoteGres);
 
       
 
