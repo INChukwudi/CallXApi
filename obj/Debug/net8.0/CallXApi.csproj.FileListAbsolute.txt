@@ -44,7 +44,6 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.bui
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\swae.build.ex.cache
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.csproj.Up2Date
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\refint\CallXApi.dll
@@ -118,3 +117,15 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\ru\Microsoft.CodeAn
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.sourcelink.json
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Blobs.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Common.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Queues.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.ClientModel.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.IO.Hashing.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Memory.Data.dll
