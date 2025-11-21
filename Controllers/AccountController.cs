@@ -28,12 +28,13 @@ namespace CallXApi
         //private SchoolDB _schoolDB;
         public CallXDBContext _context;
         private GenericService gen;
+        private EmailService _emailService;
         public IConfiguration _configuration;
         private readonly AppSettings _appSettings;
         public string myConnectString;
 
 
-        public AccountController(CallXDBContext context, GenericService generic, IConfiguration configuration, AccountDb account, IOptions<AppSettings> appSettings)
+        public AccountController(CallXDBContext context, GenericService generic, EmailService emailService, IConfiguration configuration, AccountDb account, IOptions<AppSettings> appSettings)
         {
             ///_httpContextAccessor = httpContextAccessor;
             //_schoolDB = schoolDB;
@@ -43,6 +44,7 @@ namespace CallXApi
             _context = context;
             _configuration = configuration;
             myConnectString = generic.DefaultString;
+            _emailService = emailService;
         }
 
         [HttpPost("AdminLogin")]
@@ -193,7 +195,7 @@ namespace CallXApi
             if (string.IsNullOrWhiteSpace(request.Email))
                 return BadRequest(new { error = "Email required" });
 
-            string otp = new Random().Next(100000, 999999).ToString();
+            string otp = new Random().Next(1000, 9999).ToString();
 
             try
             {
@@ -205,7 +207,7 @@ namespace CallXApi
                 {
                     // Check if record exists
                     var existsCmd = new NpgsqlCommand(
-                        "SELECT 1 FROM new_account_otp WHERE email = @email LIMIT 1",
+                        "SELECT 1 FROM new_account_otps WHERE email = @email LIMIT 1",
                         conn, tx);
                     existsCmd.Parameters.AddWithValue("email", request.Email);
 
@@ -214,7 +216,7 @@ namespace CallXApi
                     if (exists)
                     {
                         var updateCmd = new NpgsqlCommand(
-                            @"UPDATE new_account_otp 
+                            @"UPDATE new_account_otps
                           SET token = @otp, created = NOW() 
                           WHERE email = @email",
                             conn, tx);
@@ -225,7 +227,7 @@ namespace CallXApi
                     else
                     {
                         var insertCmd = new NpgsqlCommand(
-                            @"INSERT INTO new_account_otp (email, token, created) 
+                            @"INSERT INTO new_account_otps (email, token, created) 
                           VALUES (@email, @otp, NOW())",
                             conn, tx);
                         insertCmd.Parameters.AddWithValue("email", request.Email);
@@ -242,7 +244,7 @@ namespace CallXApi
                 }
 
                 // Send email through your bus
-                // await _emailBus.SendEmailOtpAsync(request.Email, otp);
+                await _emailService.SendOTPEmailAsync(request.Email, otp);
 
                 return Ok(new { success = true, message = "OTP sent" });
             }
@@ -269,7 +271,7 @@ namespace CallXApi
 
                 var selectCmd = new NpgsqlCommand(
                     @"SELECT email, token, created 
-                  FROM new_account_otp 
+                  FROM new_account_otps
                   WHERE email = @email 
                   LIMIT 1",
                     conn);
@@ -297,7 +299,7 @@ namespace CallXApi
                 reader.Close();
 
                 var updateCmd = new NpgsqlCommand(
-                    @"UPDATE new_account_otp
+                    @"UPDATE new_account_otps
                   SET token = @newToken, created = NOW()
                   WHERE email = @email",
                     conn);

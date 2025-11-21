@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "6EIcs1oMXQo=",
+  "dgSpecHash": "PPvvNXGhSwE=",
   "success": true,
   "projectFilePath": "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\SilasMe\\.nuget\\packages\\azure.core\\1.47.3\\azure.core.1.47.3.nupkg.sha512",
+    "C:\\Users\\SilasMe\\.nuget\\packages\\azure.communication.email\\1.1.0\\azure.communication.email.1.1.0.nupkg.sha512",
+    "C:\\Users\\SilasMe\\.nuget\\packages\\azure.core\\1.49.0\\azure.core.1.49.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\azure.storage.blobs\\12.26.0\\azure.storage.blobs.12.26.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\azure.storage.common\\12.25.0\\azure.storage.common.12.25.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\azure.storage.queues\\12.24.0\\azure.storage.queues.12.24.0.nupkg.sha512",
@@ -48,7 +49,7 @@
     "C:\\Users\\SilasMe\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.6.2\\swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512",
-    "C:\\Users\\SilasMe\\.nuget\\packages\\system.clientmodel\\1.6.1\\system.clientmodel.1.6.1.nupkg.sha512",
+    "C:\\Users\\SilasMe\\.nuget\\packages\\system.clientmodel\\1.7.0\\system.clientmodel.1.7.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\system.codedom\\4.4.0\\system.codedom.4.4.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\SilasMe\\.nuget\\packages\\system.composition\\6.0.0\\system.composition.6.0.0.nupkg.sha512",

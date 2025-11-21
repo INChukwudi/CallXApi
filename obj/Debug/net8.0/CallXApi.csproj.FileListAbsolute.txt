@@ -129,3 +129,4 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityM
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.ClientModel.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.IO.Hashing.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Communication.Email.dll

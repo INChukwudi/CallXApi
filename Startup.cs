@@ -107,7 +107,7 @@ namespace CallXApi
 
             services.AddTransient<AccountDb>();
             //services.AddTransient<>();
-            //services.AddTransient<SchoolDB>();
+            services.AddTransient<EmailService>();
             services.AddTransient<Connection>();
             services.AddTransient<GenericService>();
 
