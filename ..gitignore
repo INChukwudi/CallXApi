@@ -1,0 +1,52 @@
+# Build results
+bin/
+obj/
+out/
+Debug/
+Release/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+
+# ASP.NET auto-generated files
+Generated/
+wwwroot/lib/
+
+# Logs
+*.log
+
+# EF Core Migrations snapshot files (optional)
+*_Snapshot.cs
+
+# NuGet packages
+*.nupkg
+packages/
+*.snupkg
+
+# Rider / Resharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Publish output
+publish/
+
+# Dotnet tools
+.tools/
+
+# Secret manager files
+secrets.json
+
+# Azure artifacts
+*.azurePubxml
+*.publishsettings
