@@ -154,7 +154,53 @@ namespace CallXApi.Models
             var user = await GetUserStatus(username);
             //Staff mystaff = new Staff();
 
-            if (user.id > 0)
+            if ( user != null)
+            {
+                // var school = await GetUserSchool(user.SchoolId);
+                //if (user.role_id == 2)
+                //{
+                //    mystaff = await GetStaff(userId);
+                //}
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.id.ToString()),
+                        new Claim(ClaimTypes.Sid, ""),
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                UserToken tok;
+                //if (user.role_id == 1)
+                //{
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = "ACTIVE", photo = user.passport, name = user.surname + " " + user.first_name };
+                //}
+                //else
+                //{
+                //    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user.photo, name = user.last_name + " " + user.first_name };
+                //}
+
+                return tok;
+            }
+            return null;
+
+        }
+
+
+
+        public async Task<UserToken> AuthenticateAdmin(string username, string password)
+        {
+            //var userId = await GetStaffId(username, password, schoolId);
+            var user = await GetAdminUserStatus(username);
+            //Staff mystaff = new Staff();
+
+            if (user != null)
             {
                 // var school = await GetUserSchool(user.SchoolId);
                 //if (user.role_id == 2)
@@ -218,9 +264,15 @@ namespace CallXApi.Models
 
 
 
-        public async Task<admin_user> GetUserStatus(string email)
+        public async Task<admin_user> GetAdminUserStatus(string email)
         {
             var user = await (from a in _context.admin_users where a.username == email.Trim() select a).FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task<user> GetUserStatus(string email)
+        {
+            var user = await (from a in _context.users where a.username == email.Trim() select a).FirstOrDefaultAsync();
             return user;
         }
 

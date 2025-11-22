@@ -57,7 +57,7 @@ namespace CallXApi
 
                 if (await _account.CheckAdminUsernameLogin(creds.email))
                 {
-                    var user = await _account.Authenticate(creds.email, creds.password);
+                    var user = await _account.AuthenticateAdmin(creds.email, creds.password);
 
                     if (user == null)
                     {

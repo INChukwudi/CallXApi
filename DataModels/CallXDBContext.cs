@@ -31,6 +31,7 @@ namespace CallXApi.DataModels
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<admin_user> admin_users { get; set; }
         public virtual DbSet<new_account_otp> new_account_otps { get; set; }
+        public virtual DbSet<network_report> network_reports { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql(remoteGres);

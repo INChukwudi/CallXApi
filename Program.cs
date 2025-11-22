@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "bearer",
         BearerFormat = "JWT",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer abcdefgh12345\""
+        Description = "Enter your valid token (just after the 'Bearer' text and a space, note no quotation marks) in the text input below.\r\n\r\nExample: eycdefgh12345"
     });
 
     // Add global security requirement
@@ -61,6 +61,7 @@ var app = builder.Build();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
