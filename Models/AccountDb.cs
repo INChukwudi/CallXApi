@@ -151,7 +151,7 @@ namespace CallXApi.Models
         public async Task<UserToken> Authenticate(string username, string password)
         {
             //var userId = await GetStaffId(username, password, schoolId);
-            var user = await GetUserStatus(username);
+            var user = await VerifyPassword(username, password);
             //Staff mystaff = new Staff();
 
             if ( user != null)
@@ -250,6 +250,13 @@ namespace CallXApi.Models
             var encryptedPassword = Encrypt(password);
             var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
             return user.password == encryptedPassword ? user.id : 0;
+        }
+
+        public async Task<user> VerifyPassword(string email, string password)
+        {
+            var encryptedPassword = Encrypt(password);
+            var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
+            return user.password == encryptedPassword ? user : null;
         }
 
         public async Task<bool> CheckAdminUsernameLogin(string username)
