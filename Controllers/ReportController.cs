@@ -120,6 +120,14 @@ public async Task<IActionResult> GetAllReport()
             return Ok(data);
         }
 
+        [HttpGet("MyUserProfile")]
+        public async Task<IActionResult> MyUserProfile()
+        {
+           
+            var data = await _context.users.Where(t => t.id == myId).FirstOrDefaultAsync();
+            return Ok(data);
+        }
+
 
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromForm] UpdateUserDto model)
