@@ -56,9 +56,9 @@ namespace CallXApi
                 //creds.password = WallCrypto.DecryptStringAES(creds.password);
                 //creds.userName = WallCrypto.DecryptStringAES(creds.userName);
 
-                if (await _account.CheckAdminUsernameLogin(creds.email))
+                if (await _account.CheckAdminUsernameLogin(creds.email?.Trim()))
                 {
-                    var user = await _account.AuthenticateAdmin(creds.email, creds.password);
+                    var user = await _account.AuthenticateAdmin(creds?.email?.Trim(), creds?.password?.Trim());
 
                     if (user == null)
                     {

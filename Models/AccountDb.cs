@@ -259,11 +259,11 @@ namespace CallXApi.Models
             return user.password == encryptedPassword ? user : null;
         }
 
-        public async Task<admin_user> VerifyAdminPassword(string email, string password)
+        public async Task<admin_user?> VerifyAdminPassword(string email, string password)
         {
-            var encryptedPassword = Encrypt(password);
+            //var encryptedPassword = Encrypt(password);
             var user = await (from a in _context.admin_users where a.username == email select a).FirstOrDefaultAsync();
-            return user.password == encryptedPassword ? user : null;
+            return Decrypt(user.password).Trim() == password ? user : null;
         }
 
         public async Task<bool> CheckAdminUsernameLogin(string username)
