@@ -124,7 +124,11 @@ public async Task<IActionResult> GetAllReport()
         public async Task<IActionResult> MyUserProfile()
         {
            
-            var data = await _context.users.Where(t => t.id == myId).FirstOrDefaultAsync();
+            var data = await (from a in _context.users where a.id == myId select new
+            {
+                passport = a.passport,
+                fullname = a.surname + " " + a.first_name
+            }).FirstOrDefaultAsync();
             return Ok(data);
         }
 
