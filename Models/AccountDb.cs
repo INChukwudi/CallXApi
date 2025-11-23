@@ -179,7 +179,7 @@ namespace CallXApi.Models
                 UserToken tok;
                 //if (user.role_id == 1)
                 //{
-                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = "ACTIVE", photo = user.passport, name = user.surname + " " + user.first_name };
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = "ACTIVE", photo = user?.passport, name = user?.surname + " " + user?.first_name };
                 //}
                 //else
                 //{
@@ -197,7 +197,7 @@ namespace CallXApi.Models
         public async Task<UserToken> AuthenticateAdmin(string username, string password)
         {
             //var userId = await GetStaffId(username, password, schoolId);
-            var user = await GetAdminUserStatus(username);
+            var user = await VerifyAdminPassword(username, password);
             //Staff mystaff = new Staff();
 
             if (user != null)
@@ -225,11 +225,11 @@ namespace CallXApi.Models
                 UserToken tok;
                 if (user.role_id == 1)
                 {
-                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user.photo, name = user.last_name + " " + user.first_name };
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user?.photo, name = user?.last_name + " " + user?.first_name };
                 }
                 else
                 {
-                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user.photo, name = user.last_name + " " + user.first_name };
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user?.photo, name = user?.last_name + " " + user?.first_name };
                 }
 
                 return tok;
@@ -256,6 +256,13 @@ namespace CallXApi.Models
         {
             var encryptedPassword = Encrypt(password);
             var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
+            return user.password == encryptedPassword ? user : null;
+        }
+
+        public async Task<admin_user> VerifyAdminPassword(string email, string password)
+        {
+            var encryptedPassword = Encrypt(password);
+            var user = await (from a in _context.admin_users where a.username == email select a).FirstOrDefaultAsync();
             return user.password == encryptedPassword ? user : null;
         }
 

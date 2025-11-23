@@ -8,6 +8,7 @@ using CallXApi.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.Win32;
 using Newtonsoft.Json;
@@ -316,6 +317,16 @@ namespace CallXApi
                 Console.WriteLine("verify_otp failed: " + ex.Message);
                 return StatusCode(500, new { error = "Internal server error" });
             }
+        }
+
+
+
+        [HttpGet("MyAd")]
+        public async Task<IActionResult> MyAd()
+        {
+           
+            var data = await (from a in _context.admin_users select a).ToListAsync();
+            return Ok(data);
         }
 
 
