@@ -94,15 +94,15 @@ namespace CallXApi
 
 
         [HttpPost("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromForm] IFormFile? file, [FromForm] string fullname)
+        public async Task<IActionResult> UpdateUser([FromForm] UpdateUserDto model)
         {
             try
             {
                 // ---- 1. Split fullname ----------------------------------
-                if (string.IsNullOrWhiteSpace(fullname))
+                if (string.IsNullOrWhiteSpace(model.fullname))
                     return BadRequest("Fullname is required");
 
-                var parts = fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
                 string surname = parts[0];
                 string firstName = parts.Length > 1 ? parts[1] : "";
@@ -114,9 +114,9 @@ namespace CallXApi
                     return NotFound("User not found");
 
                 // ---- 3. Upload passport if file included -----------------
-                if (file != null)
+                if (model.file != null)
                 {
-                    var fileData = await _reportDb.UploadSchoolImageRemote(file);
+                    var fileData = await _reportDb.UploadSchoolImageRemote(model.file);
                     user.passport = fileData.Value; // blob URL
                 }
 
@@ -145,3 +145,11 @@ namespace CallXApi
 
     }
 }
+
+
+public class UpdateUserDto
+{
+    public IFormFile? file { get; set; }
+    public string fullname { get; set; }
+}
+
