@@ -139,10 +139,6 @@ namespace CallXApi
                 return StatusCode(500, new { error = ex.Message });
             }
         }
-
-
-
-
     }
 }
 
