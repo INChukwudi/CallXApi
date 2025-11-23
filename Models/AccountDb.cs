@@ -121,6 +121,18 @@ namespace CallXApi.Models
             return count;
         }
 
+        public async Task<long> CheckAdminUser(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username))
+                return 0;
+
+            var count = await _context.admin_users
+                .Where(s => s.username == username.Trim())
+                .LongCountAsync();
+
+            return count;
+        }
+
         public async Task<long> CheckGroupLoginInfo(NpgsqlConnection conn, string username)
         {
             string query0 = @"SELECT COUNT(""Id"") FROM ""GroupSchools"" WHERE ""Username"" = @username";

@@ -187,6 +187,105 @@ namespace CallXApi
         }
 
 
+        [HttpPost("RegisterOperator")]
+        public async Task<IActionResult> RegisterOperator([FromBody] Register model)
+        {
+            try
+            {
+                int? myuserId;
+                //var isMember = await _account.CheckUser(model.email);
+                //if (isMember == 0)
+                //{
+                    using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
+                    {
+                        await conn.OpenAsync();
+                        var mycheck = await _account.CheckAdminUser(model.email?.Trim());
+                        if (mycheck > 0)
+                        {
+                            return BadRequest(new { message = "This email has already been registered!" });
+                        }
+
+                        string query = @"INSERT INTO admin_users (username, password, created, role_id) 
+                       VALUES(@username, @password, @created, @role_id)";
+
+                        NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                        //cmd.Parameters.AddWithValue("@Username", model.userName);
+                        cmd.Parameters.AddWithValue("@username", model.email.Trim());
+                        cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
+                        //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
+                        cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("@role_id", 2);
+                        //cmd.Parameters.AddWithValue("@status", "ACTIVE");
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        //myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
+
+                    }
+                    return Ok();
+                //}
+                //else
+                //{
+                //    return BadRequest(new { message = "Member ID already registered!" });
+                //}
+            }
+            catch (Exception ex)
+            {
+                //await er.LogError(ex);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
+         [HttpPost("RegisterAdmin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterAdmin model)
+        {
+            try
+            {
+                int? myuserId;
+                //var isMember = await _account.CheckUser(model.email);
+                //if (isMember == 0)
+                //{
+                    using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
+                    {
+                        await conn.OpenAsync();
+                        var mycheck = await _account.CheckAdminUser(model.email?.Trim());
+                        if (mycheck > 0)
+                        {
+                            return BadRequest(new { message = "This email has already been registered!" });
+                        }
+
+                        string query = @"INSERT INTO admin_users (username, password, first_name, last_name, created, role_id) 
+                       VALUES(@username, @password, @first_name, @last_name, @created, @role_id)";
+
+                        NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                        //cmd.Parameters.AddWithValue("@Username", model.userName);
+                        cmd.Parameters.AddWithValue("@username", model.email.Trim());
+                        cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
+                        //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
+                        cmd.Parameters.AddWithValue("@first_name", model.first_name.Trim());
+                        cmd.Parameters.AddWithValue("@last_name", model.last_name.Trim());
+                        cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("@role_id", 1);
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        //myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
+
+                    }
+                    return Ok();
+                //}
+                //else
+                //{
+                //    return BadRequest(new { message = "Member ID already registered!" });
+                //}
+            }
+            catch (Exception ex)
+            {
+                //await er.LogError(ex);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
 
 
 
