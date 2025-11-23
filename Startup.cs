@@ -106,13 +106,15 @@ namespace CallXApi
 
 
             services.AddTransient<AccountDb>();
-            //services.AddTransient<>();
+            services.AddTransient<BlobService>();
+            services.AddTransient<ReportDb>();
             services.AddTransient<EmailService>();
             services.AddTransient<Connection>();
             services.AddTransient<GenericService>();
 
             //services.AddTransient<PaymentDB>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(x => new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorage")));
             //services.AddSingleton(sp => new ServiceBusClient(Configuration["Data:Worker:ServiceBus"]));
             //services.AddSingleton<PaymentScheduler>();
 
