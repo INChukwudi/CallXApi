@@ -75,13 +75,41 @@ namespace CallXApi
 
 
         [HttpGet("GetAllReport")]
-        public async Task<IActionResult> GetAllReport()
+public async Task<IActionResult> GetAllReport()
+{
+    var data = await (
+        from a in _context.network_reports
+        join b in _context.users on a.user_id equals b.id
+        orderby a.datetime_recorded
+        select new
         {
-            var data = await _context.network_reports
-                .OrderByDescending(x => x.datetime_recorded).ToListAsync();
-
-            return Ok(data);
+            a.id,
+            a.datetime_recorded,
+            a.issue_type,
+            a.network_provider,
+            a.location,
+            a.environment,
+            a.rating,
+            a.client_network_provider,
+            a.user_id,
+            a.client_network_digits,
+            passport = b.passport,
+            fullname = b.surname + " " + b.first_name
         }
+    ).ToListAsync();
+
+    return Ok(data);
+}
+
+
+
+        // [HttpGet("GetAllReport")]
+        // public async Task<IActionResult> GetAllReport()
+        // {
+        //     var data = await (from a in _context.network_reports join b in _context.users on a.user_id equals b.id orderby a.datetime_recorded select a).ToListAsync();
+
+        //     return Ok(data);
+        // }
 
         [HttpGet("GetAllMyReport")]
         public async Task<IActionResult> GetAllMyReport()
