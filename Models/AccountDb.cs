@@ -237,11 +237,11 @@ namespace CallXApi.Models
                 UserToken tok;
                 if (user.role_id == 1)
                 {
-                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user?.photo, name = user?.last_name + " " + user?.first_name };
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, roleId = user?.role_id, photo = user?.photo, name = user?.last_name + " " + user?.first_name };
                 }
                 else
                 {
-                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user?.photo, name = user?.last_name + " " + user?.first_name };
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, roleId = user?.role_id, photo = user?.photo, name = user?.last_name + " " + user?.first_name };
                 }
 
                 return tok;

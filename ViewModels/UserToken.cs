@@ -11,5 +11,6 @@
         public int? schoolId {get; set;}
         public string? schoolName {get; set;}
         public string? photo {get; set;}
+         public int? roleId { get; set; }
     }
 }
