@@ -191,52 +191,52 @@ public async Task<IActionResult> GetAllReport()
         }
 
 
-        [HttpPost("UpdateUser")]
-        public async Task<IActionResult> UpdateAdminUser([FromForm] UpdateUserDto model)
-        {
-            try
-            {
-                // ---- 1. Split fullname ----------------------------------
-                if (string.IsNullOrWhiteSpace(model.fullname))
-                    return BadRequest("Fullname is required");
+        // [HttpPost("UpdateUser")]
+        // public async Task<IActionResult> UpdateAdminUser([FromForm] UpdateUserDto model)
+        // {
+        //     try
+        //     {
+        //         // ---- 1. Split fullname ----------------------------------
+        //         if (string.IsNullOrWhiteSpace(model.fullname))
+        //             return BadRequest("Fullname is required");
 
-                var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        //         var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-                string surname = parts[0];
-                string firstName = parts.Length > 1 ? parts[1] : "";
-                string middleName = parts.Length > 2 ? string.Join(" ", parts.Skip(2)) : "";
+        //         string surname = parts[0];
+        //         string firstName = parts.Length > 1 ? parts[1] : "";
+        //         string middleName = parts.Length > 2 ? string.Join(" ", parts.Skip(2)) : "";
 
-                // ---- 2. Get user from DB ---------------------------------
-                var user = await _context.users.FirstOrDefaultAsync(u => u.id == myId);
-                if (user == null)
-                    return NotFound("User not found");
+        //         // ---- 2. Get user from DB ---------------------------------
+        //         var user = await _context.users.FirstOrDefaultAsync(u => u.id == myId);
+        //         if (user == null)
+        //             return NotFound("User not found");
 
-                // ---- 3. Upload passport if file included -----------------
-                if (model.file != null)
-                {
-                    var fileData = await _reportDb.UploadSchoolImageRemote(model.file);
-                    user.passport = fileData.Value; // blob URL
-                }
+        //         // ---- 3. Upload passport if file included -----------------
+        //         if (model.file != null)
+        //         {
+        //             var fileData = await _reportDb.UploadSchoolImageRemote(model.file);
+        //             user.passport = fileData.Value; // blob URL
+        //         }
 
-                // ---- 4. Update user fields -------------------------------
-                user.surname = surname;
-                user.first_name = firstName;
-                user.middle_name = middleName;
+        //         // ---- 4. Update user fields -------------------------------
+        //         user.surname = surname;
+        //         user.first_name = firstName;
+        //         user.middle_name = middleName;
 
-                // ---- 5. Save changes -------------------------------------
-                await _context.SaveChangesAsync();
+        //         // ---- 5. Save changes -------------------------------------
+        //         await _context.SaveChangesAsync();
 
-                return Ok(new
-                {
-                    message = "User updated successfully",
-                    user
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { error = ex.Message });
-            }
-        }
+        //         return Ok(new
+        //         {
+        //             message = "User updated successfully",
+        //             user
+        //         });
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, new { error = ex.Message });
+        //     }
+        // }
 
         [HttpPost("UpdateAdminProfile")]
         public async Task<IActionResult> UpdateAdminProfile([FromForm] UpdateAdminDto model)
@@ -322,7 +322,7 @@ public async Task<IActionResult> GetAllReport()
         {
             try
             {
-                int? myuserId;
+                    int? myuserId;
                     using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
                     {
                         await conn.OpenAsync();
