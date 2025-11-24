@@ -95,7 +95,8 @@ public async Task<IActionResult> GetAllReport()
             a.client_network_digits,
             a.description,
             passport = b.passport,
-            fullname = b.surname + " " + b.first_name
+            fullname = b.surname + " " + b.first_name,
+            email = b.email
         }
     ).ToListAsync();
 
