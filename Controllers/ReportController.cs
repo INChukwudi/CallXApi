@@ -324,7 +324,7 @@ public async Task<IActionResult> GetAllReport()
                         }
 
                         string query = @"INSERT INTO admin_users (username, password, provider, created_by, created, role_id, status) 
-                       VALUES(@username, @password, @provider @created_by, @created, @role_id, @status)";
+                       VALUES(@username, @password, @provider, @created_by, @created, @role_id, @status)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                         //cmd.Parameters.AddWithValue("@Username", model.userName);
