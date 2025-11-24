@@ -134,3 +134,4 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\refint\CallXApi.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.pdb
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.genruntimeconfig.cache
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\ref\CallXApi.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

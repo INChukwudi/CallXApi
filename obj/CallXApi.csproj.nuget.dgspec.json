@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj": {}
+    "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj": {}
   },
   "projects": {
-    "c:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj": {
+    "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj",
+        "projectUniqueName": "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj",
         "projectName": "CallXApi",
-        "projectPath": "c:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj",
+        "projectPath": "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\CallXApi.csproj",
         "packagesPath": "C:\\Users\\SilasMe\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\obj\\",
+        "outputPath": "C:\\Users\\SilasMe\\Pictures\\CallXApi\\CallXApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -32,7 +32,43 @@ public class EmailService
                     <p>Use this code to verify your email for <strong>CallX</strong>:</p>
                     <h2 style='font-size:24px; font-weight:bold; color:#333;'>{otp}</h2>
                     <p>This code will expire in 10 minutes.</p>
-                    <p>Thank you,<br/>The Pansive Team</p>
+                    <p>Thank you,<br/>The CallX Team</p>
+                "
+            };
+
+            var emailRecipients = new EmailRecipients(new[]
+            {
+                new EmailAddress(email)
+            });
+
+            var emailMessage = new EmailMessage(_sender, emailRecipients, emailContent);
+
+            // Send
+            var result = await _emailClient.SendAsync(WaitUntil.Completed, emailMessage);
+
+            Console.WriteLine("Email sent successfully");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error sending OTP: {ex.Message}");
+        }
+    }
+
+
+
+        public async Task SendPasswordEmailAsync(string email, string otp)
+    {
+        try
+        {
+            var emailContent = new EmailContent("Your CallX Password - CallX.com")
+            {
+                PlainText = $"Use this passwword to sign-in to your account on the Call-X site. ",
+
+                Html = $@"
+                    <p>Hello,</p>
+                    <p>Use this password to sign-in to your account for <strong>CallX</strong>:</p>
+                    <h2 style='font-size:24px; font-weight:bold; color:#333;'>{otp}</h2>
+                    <p>Thank you,<br/>The CallX Team</p>
                 "
             };
 

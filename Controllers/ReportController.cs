@@ -339,6 +339,8 @@ public async Task<IActionResult> GetAllReport()
 
                         await cmd.ExecuteNonQueryAsync();
 
+                        await _emailService.SendPasswordEmailAsync(model.email.Trim(), model.password.Trim());
+
                         //myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
 
                     }
