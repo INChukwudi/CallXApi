@@ -122,6 +122,14 @@ public async Task<IActionResult> GetAllReport()
             return Ok(data);
         }
 
+        [HttpGet("GetAllOperators")]
+        public async Task<IActionResult> GetAllOperators()
+        {
+            var data = await _context.admin_users.Where(t => t.role_id == 2)
+                .OrderByDescending(x => x.created).ToListAsync();
+            return Ok(data);
+        }
+
         [HttpGet("MyUserProfile")]
         public async Task<IActionResult> MyUserProfile()
         {
@@ -182,6 +190,182 @@ public async Task<IActionResult> GetAllReport()
             }
         }
 
+
+        [HttpPost("UpdateUser")]
+        public async Task<IActionResult> UpdateAdminUser([FromForm] UpdateUserDto model)
+        {
+            try
+            {
+                // ---- 1. Split fullname ----------------------------------
+                if (string.IsNullOrWhiteSpace(model.fullname))
+                    return BadRequest("Fullname is required");
+
+                var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                string surname = parts[0];
+                string firstName = parts.Length > 1 ? parts[1] : "";
+                string middleName = parts.Length > 2 ? string.Join(" ", parts.Skip(2)) : "";
+
+                // ---- 2. Get user from DB ---------------------------------
+                var user = await _context.users.FirstOrDefaultAsync(u => u.id == myId);
+                if (user == null)
+                    return NotFound("User not found");
+
+                // ---- 3. Upload passport if file included -----------------
+                if (model.file != null)
+                {
+                    var fileData = await _reportDb.UploadSchoolImageRemote(model.file);
+                    user.passport = fileData.Value; // blob URL
+                }
+
+                // ---- 4. Update user fields -------------------------------
+                user.surname = surname;
+                user.first_name = firstName;
+                user.middle_name = middleName;
+
+                // ---- 5. Save changes -------------------------------------
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "User updated successfully",
+                    user
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+        [HttpPost("UpdateAdminProfile")]
+        public async Task<IActionResult> UpdateAdminProfile([FromForm] UpdateAdminDto model)
+        {
+            try
+            {
+                // ---- 1. Split fullname ----------------------------------
+                // if (string.IsNullOrWhiteSpace(model.fullname))
+                //     return BadRequest("Fullname is required");
+
+                // var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                // string surname = parts[0];
+                // string firstName = parts.Length > 1 ? parts[1] : "";
+                // string middleName = parts.Length > 2 ? string.Join(" ", parts.Skip(2)) : "";
+
+                // ---- 2. Get user from DB ---------------------------------
+                var user = await _context.admin_users.FirstOrDefaultAsync(u => u.id == myId);
+                if (user == null)
+                    return NotFound("User not found");
+
+                // ---- 3. Upload passport if file included -----------------
+                if (model.file != null)
+                {
+                    var fileData = await _reportDb.UploadSchoolImageRemote(model.file);
+                    user.photo = fileData.Value; // blob URL
+                }
+
+                // ---- 4. Update user fields -------------------------------
+                user.last_name = model?.lastname;
+                user.first_name = model?.firstname;
+                user.department = model?.department;
+
+                // ---- 5. Save changes -------------------------------------
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "User updated successfully",
+                    user
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+
+
+         [HttpPost("UpdateAdminPassword")]
+        public async Task<IActionResult> UpdateAdminPassword([FromForm] PasswordObj model)
+        {
+            try
+            {
+
+                // ---- 2. Get user from DB ---------------------------------
+                var user = await _context.admin_users.FirstOrDefaultAsync(u => u.id == myId);
+                if (user == null)
+                    return NotFound("User not found");
+
+                // ---- 4. Update user fields -------------------------------
+                user.password = _account.Encrypt(model?.password);
+
+                // ---- 5. Save changes -------------------------------------
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "User updated successfully",
+                    user
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+
+        [HttpPost("RegisterOperator")]
+        public async Task<IActionResult> RegisterOperator([FromBody] RegisterOperator model)
+        {
+            try
+            {
+                int? myuserId;
+                    using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
+                    {
+                        await conn.OpenAsync();
+                        var mycheck = await _account.CheckAdminUser(model.email?.Trim());
+                        if (mycheck > 0)
+                        {
+                            return BadRequest(new { message = "This email has already been registered!" });
+                        }
+
+                        string query = @"INSERT INTO admin_users (username, password, provider, created_by, created, role_id) 
+                       VALUES(@username, @password, @provider @created_by, @created, @role_id)";
+
+                        NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+                        //cmd.Parameters.AddWithValue("@Username", model.userName);
+                        cmd.Parameters.AddWithValue("@username", model.email.Trim());
+                        cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
+                        cmd.Parameters.AddWithValue("@provider", model.provider.Trim());
+                        //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
+                        cmd.Parameters.AddWithValue("@created_by", myId);
+                        cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
+                        cmd.Parameters.AddWithValue("@role_id", 2);
+                        //cmd.Parameters.AddWithValue("@status", "ACTIVE");
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        //myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
+
+                    }
+                    return Ok();
+                //}
+                //else
+                //{
+                //    return BadRequest(new { message = "Member ID already registered!" });
+                //}
+            }
+            catch (Exception ex)
+            {
+                //await er.LogError(ex);
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
         [HttpGet("device-info")]
     public IActionResult GetDeviceInfo()
     {
@@ -206,5 +390,19 @@ public class UpdateUserDto
 {
     public IFormFile? file { get; set; }
     public string fullname { get; set; }
+}
+
+
+public class UpdateAdminDto
+{
+    public IFormFile? file { get; set; }
+    public string? lastname { get; set; }
+    public string? firstname { get; set; }
+    public string? department { get; set; }
+}
+
+public class PasswordObj
+{
+    public string? password { get; set; }
 }
 

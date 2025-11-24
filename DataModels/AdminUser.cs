@@ -17,8 +17,12 @@
         public string? photo { get; set; }
 
         public string? user_type { get; set; }
+         public string? provider { get; set; }
 
-        public short? status { get; set; }
+         public string? department { get; set; }
+
+        public string? status { get; set; }
+        public int? created_by { get; set; }
 
         public DateTime? created { get; set; }
 
