@@ -60,6 +60,7 @@ var app = builder.Build();
 //}
 
 app.UseHttpsRedirection();
+app.UseCors("ApiCorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();

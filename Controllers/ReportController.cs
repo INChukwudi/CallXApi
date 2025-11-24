@@ -93,6 +93,7 @@ public async Task<IActionResult> GetAllReport()
             a.client_network_provider,
             a.user_id,
             a.client_network_digits,
+            a.description,
             passport = b.passport,
             fullname = b.surname + " " + b.first_name
         }
@@ -179,6 +180,23 @@ public async Task<IActionResult> GetAllReport()
                 return StatusCode(500, new { error = ex.Message });
             }
         }
+
+        [HttpGet("device-info")]
+    public IActionResult GetDeviceInfo()
+    {
+        // Get IP Address
+        var ip = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+        // Get User-Agent (device name)
+        var deviceName = Request.Headers["User-Agent"].ToString();
+
+        // Return result
+        return Ok(new
+        {
+            ipAddress = ip,
+            device = deviceName
+        });
+    }
     }
 }
 

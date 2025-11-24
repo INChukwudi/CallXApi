@@ -8,6 +8,7 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\CallXApi.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\CallXApi.pdb
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Communication.Email.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Identity.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Blobs.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Common.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Storage.Queues.dll
@@ -29,6 +30,8 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Extension
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
@@ -53,6 +56,7 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Composition.
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.IO.Hashing.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -105,6 +109,7 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\ru\Microsoft.CodeAn
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.csproj.AssemblyReference.cache
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\rpswa.dswa.cache.json
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.GeneratedMSBuildEditorConfig.editorconfig
@@ -129,8 +134,3 @@ C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\refint\CallXApi.dll
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.pdb
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\CallXApi.genruntimeconfig.cache
 C:\Users\SilasMe\Pictures\CallXApi\CallXApi\obj\Debug\net8.0\ref\CallXApi.dll
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Azure.Identity.dll
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Identity.Client.dll
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\SilasMe\Pictures\CallXApi\CallXApi\bin\Debug\net8.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
