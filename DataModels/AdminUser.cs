@@ -4,14 +4,14 @@
     {
         public int id { get; set; }
 
-        public string first_name { get; set; } = null!;
-        public string last_name { get; set; } = null!;
+        public string? first_name { get; set; } = null!;
+        public string? last_name { get; set; } = null!;
 
         public string? phone { get; set; }
 
         public string? email { get; set; }
 
-        public string username { get; set; } = null!;
+        public string? username { get; set; } = null!;
 
         public string? password { get; set; }
         public string? photo { get; set; }
