@@ -205,14 +205,14 @@ namespace CallXApi
                             return BadRequest(new { message = "This email has already been registered!" });
                         }
 
-                        string query = @"INSERT INTO admin_users (username, password, first_name, last_name, created, role_id) 
-                       VALUES(@username, @password, @first_name, @last_name, @created, @role_id)";
+                        string query = @"INSERT INTO admin_users (username, password, first_name, last_name, created, role_id, status) 
+                       VALUES(@username, @password, @first_name, @last_name, @created, @role_id, @status)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                         //cmd.Parameters.AddWithValue("@Username", model.userName);
                         cmd.Parameters.AddWithValue("@username", model.email.Trim());
                         cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
-                        //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
+                        cmd.Parameters.AddWithValue("@status", "ACTIVE");
                         cmd.Parameters.AddWithValue("@first_name", model.first_name.Trim());
                         cmd.Parameters.AddWithValue("@last_name", model.last_name.Trim());
                         cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);

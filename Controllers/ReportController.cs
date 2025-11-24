@@ -323,15 +323,15 @@ public async Task<IActionResult> GetAllReport()
                             return BadRequest(new { message = "This email has already been registered!" });
                         }
 
-                        string query = @"INSERT INTO admin_users (username, password, provider, created_by, created, role_id) 
-                       VALUES(@username, @password, @provider @created_by, @created, @role_id)";
+                        string query = @"INSERT INTO admin_users (username, password, provider, created_by, created, role_id, status) 
+                       VALUES(@username, @password, @provider @created_by, @created, @role_id, @status)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                         //cmd.Parameters.AddWithValue("@Username", model.userName);
                         cmd.Parameters.AddWithValue("@username", model.email.Trim());
                         cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
                         cmd.Parameters.AddWithValue("@provider", model.provider.Trim());
-                        //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
+                        cmd.Parameters.AddWithValue("@status", "ACTIVE");
                         cmd.Parameters.AddWithValue("@created_by", myId);
                         cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
                         cmd.Parameters.AddWithValue("@role_id", 2);
