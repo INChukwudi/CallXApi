@@ -243,15 +243,6 @@ public async Task<IActionResult> GetAllReport()
         {
             try
             {
-                // ---- 1. Split fullname ----------------------------------
-                // if (string.IsNullOrWhiteSpace(model.fullname))
-                //     return BadRequest("Fullname is required");
-
-                // var parts = model.fullname.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-                // string surname = parts[0];
-                // string firstName = parts.Length > 1 ? parts[1] : "";
-                // string middleName = parts.Length > 2 ? string.Join(" ", parts.Skip(2)) : "";
 
                 // ---- 2. Get user from DB ---------------------------------
                 var user = await _context.admin_users.FirstOrDefaultAsync(u => u.id == myId);
