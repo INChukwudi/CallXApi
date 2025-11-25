@@ -154,6 +154,11 @@
         "IsRequired": false
       },
       {
+        "Name": "call_direction",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "location",
         "Type": "System.String",
         "IsRequired": false
@@ -233,6 +238,22 @@
   },
   {
     "ContainingType": "CallXApi.ReportController",
+    "Method": "GetOperatorProfile",
+    "RelativePath": "api/Report/GetOperatorProfile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "operatorId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.ReportController",
     "Method": "GetReportById",
     "RelativePath": "api/Report/GetReportById",
     "HttpMethod": "GET",
@@ -249,12 +270,38 @@
   },
   {
     "ContainingType": "CallXApi.ReportController",
+    "Method": "MyOperatorProfile",
+    "RelativePath": "api/Report/MyOperatorProfile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.ReportController",
     "Method": "MyUserProfile",
     "RelativePath": "api/Report/MyUserProfile",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.ReportController",
+    "Method": "RecordAdminActivity",
+    "RelativePath": "api/Report/RecordAdminActivity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "description",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

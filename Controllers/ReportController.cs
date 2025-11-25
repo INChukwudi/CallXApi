@@ -251,6 +251,65 @@ public async Task<IActionResult> GetOperatorProfile(string operatorId)
 }
 
 
+[HttpGet("GetAdminProfile")]
+public async Task<IActionResult> GetAdminProfile()
+{
+    try
+    {
+
+        // ⭐ Get profile
+        var profile = await (from a in _context.admin_users
+                             where a.id ==  myId
+                             select new
+                             {
+                                 a.id,
+                                 fullname = a.last_name + " " + a.first_name,
+                                 a.provider,
+                                 a.email,
+                                 a.username,
+                                 a.role_id,
+                                 a.status,
+                                 last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+                                 a.created,
+                                 a.department,
+                                 a.photo,
+                                 a.phone
+                             })
+                             .FirstOrDefaultAsync();
+
+        if (profile == null)
+            return NotFound("Operator not found");
+
+        // ⭐ Get activity logs for this operator
+        var logs = await _context.admin_activity_logs
+            .Where(x => x.admin_id == myId)
+            .OrderByDescending(x => x.created)
+            .Select(x => new
+            {
+                x.id,
+                x.description,
+                x.ip_address,
+                x.platform,
+                x.created
+            })
+            .ToListAsync();
+
+        // ⭐ Merge both results
+        var result = new
+        {
+            profile,
+            activity_logs = logs
+        };
+
+        return Ok(result);
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { error = ex.Message });
+    }
+}
+
+
 
         [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromForm] UpdateUserDto model)
