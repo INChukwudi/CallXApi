@@ -435,6 +435,18 @@
         }
       }
     },
+    "/api/Report/GetAdminProfile": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Report/UpdateUser": {
       "post": {
         "tags": [

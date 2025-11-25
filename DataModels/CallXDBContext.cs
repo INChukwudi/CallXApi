@@ -35,6 +35,8 @@ namespace CallXApi.DataModels
 
         public virtual DbSet<admin_activity_log> admin_activity_logs { get; set; }
 
+        public virtual DbSet<user_activity_log> user_activity_logs { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql(remoteGres);
 

@@ -302,6 +302,22 @@ namespace CallXApi.Models
             return user;
         }
 
+        public async Task<int> UpdateUserLastLogin(int id)
+        {
+            var borrow = await _context.users.FindAsync(id);
+            borrow.last_login = DateTime.UtcNow;
+            _context.Entry(borrow).State = EntityState.Modified;
+			return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateAdminLastLogin(int id)
+        {
+            var borrow = await _context.admin_users.FindAsync(id);
+            borrow.last_login = DateTime.UtcNow;
+            _context.Entry(borrow).State = EntityState.Modified;
+			return await _context.SaveChangesAsync();
+        }
+
         //public async Task<StudentDetails> GetStudentStatus(string email, int? mySchoolId)
         //{
         //    var user = await (from a in _context.StudentDetails where a.AdmissionNo.Trim() == email.Trim() && a.SchoolId == mySchoolId select a).FirstOrDefaultAsync();

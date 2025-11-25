@@ -26,7 +26,7 @@ namespace CallXApi
     public class AccountController : ControllerBase
     {
         private AccountDb _account;
-        //private SchoolDB _schoolDB;
+        private ReportDb _reportDb;
         public CallXDBContext _context;
         private GenericService gen;
         private EmailService _emailService;
@@ -35,10 +35,10 @@ namespace CallXApi
         public string myConnectString;
 
 
-        public AccountController(CallXDBContext context, GenericService generic, EmailService emailService, IConfiguration configuration, AccountDb account, IOptions<AppSettings> appSettings)
+        public AccountController(CallXDBContext context, GenericService generic, EmailService emailService, IConfiguration configuration, AccountDb account, ReportDb reportDb, IOptions<AppSettings> appSettings)
         {
             ///_httpContextAccessor = httpContextAccessor;
-            //_schoolDB = schoolDB;
+            _reportDb = reportDb;
             gen = generic;
             _appSettings = appSettings.Value;
             _account = account;
@@ -65,8 +65,11 @@ namespace CallXApi
                         return Ok(new UserToken { code = 2 });
                     }
                     //await UpdateLastLogin(myId);
+                    await _account.UpdateAdminLastLogin(Convert.ToInt32(user.id));
+                    await LogAdminActivityById("Logged in", Convert.ToInt32(user.id));
                     return Ok(user);
                 }
+                
                 return Ok(new UserToken { code = 3 });
             }
             catch (Exception ex)
@@ -97,6 +100,8 @@ namespace CallXApi
                             return Ok(new UserToken { code = 2 });
                         }
                         //await UpdateLastLogin(myId);
+                        await _account.UpdateUserLastLogin(Convert.ToInt32(user.id));
+                        await LogUserActivityById("Logged in", Convert.ToInt32(user.id));
                         return Ok(user);
                     }
                     return Ok(new UserToken { code = 3 });
@@ -376,6 +381,36 @@ namespace CallXApi
            
             var data = await (from a in _context.admin_users select a).ToListAsync();
             return Ok(data);
+        }
+
+        private async Task LogAdminActivityById(string description, int userId)
+        {
+            var activity = new admin_activity_log
+            {
+                admin_id = userId,
+                ip_address = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                platform = Request.Headers["User-Agent"].ToString(),
+                description = description,
+                created = DateTime.UtcNow
+            };
+
+            await _context.admin_activity_logs.AddAsync(activity);
+            await _context.SaveChangesAsync();
+        }
+
+        private async Task LogUserActivityById(string description, int userId)
+        {
+            var activity = new user_activity_log
+            {
+                user_id = userId,
+                ip_address = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                platform = Request.Headers["User-Agent"].ToString(),
+                description = description,
+                created = DateTime.UtcNow
+            };
+
+            await _context.user_activity_logs.AddAsync(activity);
+            await _context.SaveChangesAsync();
         }
 
 

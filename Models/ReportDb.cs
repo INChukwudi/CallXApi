@@ -1,4 +1,5 @@
-﻿using CallXApi.DataModels;
+﻿using Azure.Core;
+using CallXApi.DataModels;
 using CallXApi.Services;
 using Microsoft.Extensions.Options;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -38,5 +39,7 @@ namespace CallXApi.Models
             return reel;
             //return new {ext = ext, path = blobimgpath, size = Lengther(myfile.Length), name = myfile.Name};
         }
+
+       
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f643256c60360a32c2f298ead6e99ccc31e89ff4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0efb5ea194760ba8e5a7baf605fd99a39b939909")]
 [assembly: System.Reflection.AssemblyProductAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CallXApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

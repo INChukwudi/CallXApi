@@ -208,6 +208,16 @@
   },
   {
     "ContainingType": "CallXApi.ReportController",
+    "Method": "GetAdminProfile",
+    "RelativePath": "api/Report/GetAdminProfile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.ReportController",
     "Method": "GetAllMyReport",
     "RelativePath": "api/Report/GetAllMyReport",
     "HttpMethod": "GET",

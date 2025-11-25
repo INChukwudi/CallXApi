@@ -269,7 +269,7 @@ public async Task<IActionResult> GetAdminProfile()
                                  a.username,
                                  a.role_id,
                                  a.status,
-                                 last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+                                 last_login = a.last_login == null ? (int?)null : (int)(DateTime.UtcNow - a.last_login.Value).TotalDays,
                                  a.created,
                                  a.department,
                                  a.photo,
@@ -579,6 +579,8 @@ public async Task<IActionResult> RecordAdminActivity(string description)
     await _context.admin_activity_logs.AddAsync(activity);
     await _context.SaveChangesAsync();
 }
+
+        
 
     }
 }
