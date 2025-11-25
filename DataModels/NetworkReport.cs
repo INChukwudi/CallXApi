@@ -5,8 +5,10 @@
         public int id { get; set; }
         public int user_id { get; set; }
         public DateTime datetime_recorded { get; set; }
-        public string? issue_type { get; set; }
+        public string? report_category { get; set; }
+        public string? experience_type { get; set; }
         public string? network_provider { get; set; }
+        public string? call_direction { get; set; }
         public string? location { get; set; }
         public string? environment { get; set; }
         public string? description { get; set; }

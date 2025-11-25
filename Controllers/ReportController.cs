@@ -85,7 +85,8 @@ public async Task<IActionResult> GetAllReport()
         {
             a.id,
             a.datetime_recorded,
-            a.issue_type,
+            a.experience_type,
+            a.report_category,
             a.network_provider,
             a.location,
             a.environment,
@@ -94,6 +95,7 @@ public async Task<IActionResult> GetAllReport()
             a.user_id,
             a.client_network_digits,
             a.description,
+            a.call_direction,
             passport = b.passport,
             fullname = b.surname + " " + b.first_name,
             email = b.email

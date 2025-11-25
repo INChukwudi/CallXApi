@@ -139,7 +139,12 @@
         "IsRequired": false
       },
       {
-        "Name": "issue_type",
+        "Name": "report_category",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "experience_type",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -318,27 +323,6 @@
   {
     "ContainingType": "CallXApi.ReportController",
     "Method": "UpdateUser",
-    "RelativePath": "api/Report/UpdateUser",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "file",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      },
-      {
-        "Name": "fullname",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "CallXApi.ReportController",
-    "Method": "UpdateAdminUser",
     "RelativePath": "api/Report/UpdateUser",
     "HttpMethod": "POST",
     "IsController": true,
