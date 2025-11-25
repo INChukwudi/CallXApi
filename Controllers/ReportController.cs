@@ -102,6 +102,8 @@ public async Task<IActionResult> GetAllReport()
         }
     ).ToListAsync();
 
+    await this.LogAdminActivity("Viewed Reports");
+
     return Ok(data);
 }
 
@@ -143,6 +145,111 @@ public async Task<IActionResult> GetAllReport()
             }).FirstOrDefaultAsync();
             return Ok(data);
         }
+
+         [HttpGet("MyOperatorProfile")]
+        public async Task<IActionResult> MyOperatorProfile()
+        {
+           
+            var data = await (from a in _context.admin_users where a.id == myId select new
+            {
+                a.id,
+            fullname = a.last_name + " " + a.first_name,
+            a.provider,
+            a.email,
+            a.username,
+            a.role_id,
+            a.status,
+            last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+            a.created,
+            a.department,
+            a.photo,
+            a.phone
+            }).FirstOrDefaultAsync();
+            return Ok(data);
+        }
+
+
+        //  [HttpGet("GetOperatorProfile")]
+        // public async Task<IActionResult> GetOperatorProfile(string operatorId)
+        // {
+           
+        //     var data = await (from a in _context.admin_users where a.id == Convert.ToInt32(operatorId) select new
+        //     {
+        //         a.id,
+        //     fullname = a.last_name + " " + a.first_name,
+        //     a.provider,
+        //     a.email,
+        //     a.username,
+        //     a.role_id,
+        //     a.status,
+        //     last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+        //     a.created,
+        //     a.department,
+        //     a.photo,
+        //     a.phone
+        //     }).FirstOrDefaultAsync();
+        //     return Ok(data);
+        // }
+
+[HttpGet("GetOperatorProfile")]
+public async Task<IActionResult> GetOperatorProfile(string operatorId)
+{
+    try
+    {
+        int opId = Convert.ToInt32(operatorId);
+
+        // ⭐ Get profile
+        var profile = await (from a in _context.admin_users
+                             where a.id == opId
+                             select new
+                             {
+                                 a.id,
+                                 fullname = a.last_name + " " + a.first_name,
+                                 a.provider,
+                                 a.email,
+                                 a.username,
+                                 a.role_id,
+                                 a.status,
+                                 last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+                                 a.created,
+                                 a.department,
+                                 a.photo,
+                                 a.phone
+                             })
+                             .FirstOrDefaultAsync();
+
+        if (profile == null)
+            return NotFound("Operator not found");
+
+        // ⭐ Get activity logs for this operator
+        var logs = await _context.admin_activity_logs
+            .Where(x => x.admin_id == opId)
+            .OrderByDescending(x => x.created)
+            .Select(x => new
+            {
+                x.id,
+                x.description,
+                x.ip_address,
+                x.platform,
+                x.created
+            })
+            .ToListAsync();
+
+        // ⭐ Merge both results
+        var result = new
+        {
+            profile,
+            activity_logs = logs
+        };
+
+        return Ok(result);
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { error = ex.Message });
+    }
+}
+
 
 
         [HttpPost("UpdateUser")]
@@ -296,6 +403,7 @@ public async Task<IActionResult> GetAllReport()
 
                 // ---- 5. Save changes -------------------------------------
                 await _context.SaveChangesAsync();
+                await this.LogAdminActivity("Updated own password");
 
                 return Ok(new
                 {
@@ -340,6 +448,7 @@ public async Task<IActionResult> GetAllReport()
                         //cmd.Parameters.AddWithValue("@status", "ACTIVE");
 
                         await cmd.ExecuteNonQueryAsync();
+                        await this.LogAdminActivity("Created an account");
 
                         await _emailService.SendPasswordEmailAsync(model.email.Trim(), model.password.Trim());
 
@@ -360,6 +469,25 @@ public async Task<IActionResult> GetAllReport()
             }
         }
 
+        [HttpPost("RecordAdminActivity")]
+public async Task<IActionResult> RecordAdminActivity(string description)
+{
+    try
+    {
+        if (string.IsNullOrWhiteSpace(description))
+            return BadRequest("Description is required");
+
+        await LogAdminActivity(description);
+
+        return Ok();
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { error = ex.Message });
+    }
+}
+
+
 
         [HttpGet("device-info")]
     public IActionResult GetDeviceInfo()
@@ -377,6 +505,22 @@ public async Task<IActionResult> GetAllReport()
             device = deviceName
         });
     }
+
+    private async Task LogAdminActivity(string description)
+{
+    var activity = new admin_activity_log
+    {
+        admin_id = myId,
+        ip_address = HttpContext.Connection.RemoteIpAddress?.ToString(),
+        platform = Request.Headers["User-Agent"].ToString(),
+        description = description,
+        created = DateTime.UtcNow
+    };
+
+    await _context.admin_activity_logs.AddAsync(activity);
+    await _context.SaveChangesAsync();
+}
+
     }
 }
 
