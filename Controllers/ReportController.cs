@@ -99,9 +99,9 @@ public async Task<IActionResult> GetAllReport()
             passport = b.passport,
             fullname = b.surname + " " + b.first_name,
             email = b.username,
-            a.network_types,
+            a.network_type,
             a.state,
-            a.phone_type
+            a.device_model
         }
     ).ToListAsync();
 

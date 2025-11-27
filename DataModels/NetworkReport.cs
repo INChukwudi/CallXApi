@@ -16,8 +16,8 @@
         public string? client_network_provider { get; set; }
         public string? client_network_digits { get; set; }
         public string? state { get; set; }
-        public string? network_types { get; set; }
-        public string? phone_type { get; set; }
+        public string? network_type { get; set; }
+        public string? device_model { get; set; }
         public DateTime created { get; set; }
     }
 }

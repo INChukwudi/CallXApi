@@ -137,6 +137,9 @@ namespace CallXApi.Migrations
                     b.Property<string>("description")
                         .HasColumnType("text");
 
+                    b.Property<string>("device_model")
+                        .HasColumnType("text");
+
                     b.Property<string>("environment")
                         .HasColumnType("text");
 
@@ -149,10 +152,7 @@ namespace CallXApi.Migrations
                     b.Property<string>("network_provider")
                         .HasColumnType("text");
 
-                    b.Property<string>("network_types")
-                        .HasColumnType("text");
-
-                    b.Property<string>("phone_type")
+                    b.Property<string>("network_type")
                         .HasColumnType("text");
 
                     b.Property<int?>("rating")

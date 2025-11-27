@@ -189,6 +189,21 @@
         "IsRequired": false
       },
       {
+        "Name": "state",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "network_type",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "device_model",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
         "Name": "created",
         "Type": "System.DateTime",
         "IsRequired": false
