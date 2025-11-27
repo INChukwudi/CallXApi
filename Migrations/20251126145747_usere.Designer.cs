@@ -3,6 +3,7 @@ using System;
 using CallXApi.DataModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CallXApi.Migrations
 {
     [DbContext(typeof(CallXDBContext))]
-    partial class CallXDBContextModelSnapshot : ModelSnapshot
+    [Migration("20251126145747_usere")]
+    partial class usere
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,19 +152,10 @@ namespace CallXApi.Migrations
                     b.Property<string>("network_provider")
                         .HasColumnType("text");
 
-                    b.Property<string>("network_types")
-                        .HasColumnType("text");
-
-                    b.Property<string>("phone_type")
-                        .HasColumnType("text");
-
                     b.Property<int?>("rating")
                         .HasColumnType("integer");
 
                     b.Property<string>("report_category")
-                        .HasColumnType("text");
-
-                    b.Property<string>("state")
                         .HasColumnType("text");
 
                     b.Property<int>("user_id")

@@ -98,7 +98,10 @@ public async Task<IActionResult> GetAllReport()
             a.call_direction,
             passport = b.passport,
             fullname = b.surname + " " + b.first_name,
-            email = b.email
+            email = b.username,
+            a.network_types,
+            a.state,
+            a.phone_type
         }
     ).ToListAsync();
 
@@ -210,7 +213,7 @@ public async Task<IActionResult> GetOperatorProfile(string operatorId)
                                  a.username,
                                  a.role_id,
                                  a.status,
-                                 last_login = (int)(DateTime.UtcNow - a.last_login).Value.TotalDays,
+                                 last_login = a.last_login == null ? (int?)null : (int)(DateTime.UtcNow - a.last_login.Value).TotalDays,
                                  a.created,
                                  a.department,
                                  a.photo,
