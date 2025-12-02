@@ -280,7 +280,7 @@ namespace CallXApi.Models
 
         public async Task<bool> CheckAdminUsernameLogin(string username)
         {
-            if (await _context.admin_users.AnyAsync(t => t.username == username.Trim()))
+            if (await _context.admin_users.AnyAsync(t => t.username == username.Trim() && t.status == "ACTIVE"))
             {
                 return true;
             }
