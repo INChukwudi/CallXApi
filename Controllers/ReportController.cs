@@ -105,7 +105,7 @@ public async Task<IActionResult> GetAllReport()
         }
     ).ToListAsync();
 
-    await this.LogAdminActivity("Viewed Reports");
+   // await this.LogAdminActivity("Viewed Reports");
 
     return Ok(data);
 }
