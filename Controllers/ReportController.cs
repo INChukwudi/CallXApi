@@ -480,6 +480,44 @@ public async Task<IActionResult> GetAdminProfile()
         }
 
 
+        [HttpPost("ActivateOperator")]
+        public async Task<IActionResult> ActivateOperator(string operatorId)
+        {
+            try
+            {
+
+                // ---- 2. Get user from DB ---------------------------------
+                var user = await _context.admin_users.FirstOrDefaultAsync(u => u.id == Convert.ToInt32(operatorId));
+                if (user == null)
+                    return NotFound("User not found");
+
+                // ---- 4. Update user fields -------------------------------
+                if (user.status == "INACTIVE")
+                {
+                    user.status = "ACTIVE";
+                } else
+                {
+                    user.status = "INACTIVE";
+                }
+                
+
+                // ---- 5. Save changes -------------------------------------
+                await _context.SaveChangesAsync();
+                await this.LogAdminActivity("Changed Operator status");
+
+                return Ok(new
+                {
+                    message = "User updated successfully",
+                    user
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+
         [HttpPost("RegisterOperator")]
         public async Task<IActionResult> RegisterOperator([FromBody] RegisterOperator model)
         {
