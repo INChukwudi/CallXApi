@@ -647,3 +647,9 @@ public class PasswordObj
     public string? password { get; set; }
 }
 
+public class ForgotPasswordObj
+{
+    public string? password { get; set; }
+    public string? email { get; set; }
+}
+

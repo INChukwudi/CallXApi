@@ -513,6 +513,33 @@ namespace CallXApi
             return Ok(data);
         }
 
+
+
+        [HttpPost("UpdateUserPassword")]
+        public async Task<IActionResult> UpdateUserPassword([FromForm] ForgotPasswordObj model)
+        {
+            try
+            {
+                var user = await _context.users.FirstOrDefaultAsync(u => u.email == model.email);
+                if (user == null)
+                    return NotFound("User not found");
+                    
+                user.password = _account.Encrypt(model?.password);
+                await _context.SaveChangesAsync();
+                //await this.LogAdminActivity("Updated own password");
+
+                return Ok(new
+                {
+                    message = "User updated successfully",
+                    user
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
         private async Task LogAdminActivityById(string description, int userId)
         {
             var activity = new admin_activity_log
