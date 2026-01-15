@@ -524,7 +524,7 @@ namespace CallXApi
         {
             try
             {
-                var user = await _context.users.FirstOrDefaultAsync(u => u.email == model.email);
+                var user = await _context.users.FirstOrDefaultAsync(u => u.username == model.email);
                 if (user == null)
                     return NotFound("User not found");
                     
