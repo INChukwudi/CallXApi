@@ -272,21 +272,23 @@ namespace CallXApi
                     {
                         var updateCmd = new NpgsqlCommand(
                             @"UPDATE new_account_otps
-                          SET token = @otp, created = NOW() 
+                          SET token = @otp, created = @created 
                           WHERE email = @email",
                             conn, tx);
                         updateCmd.Parameters.AddWithValue("email", request.Email);
                         updateCmd.Parameters.AddWithValue("otp", otp);
+                        updateCmd.Parameters.AddWithValue("created", DateTime.UtcNow);
                         await updateCmd.ExecuteNonQueryAsync();
                     }
                     else
                     {
                         var insertCmd = new NpgsqlCommand(
                             @"INSERT INTO new_account_otps (email, token, created) 
-                          VALUES (@email, @otp, NOW())",
+                          VALUES (@email, @otp, @created)",
                             conn, tx);
                         insertCmd.Parameters.AddWithValue("email", request.Email);
                         insertCmd.Parameters.AddWithValue("otp", otp);
+                        insertCmd.Parameters.AddWithValue("created", DateTime.UtcNow);
                         await insertCmd.ExecuteNonQueryAsync();
                     }
 
@@ -355,12 +357,13 @@ namespace CallXApi
 
                 var updateCmd = new NpgsqlCommand(
                     @"UPDATE new_account_otps
-                  SET token = @newToken, created = NOW()
+                  SET token = @newToken, created = @created
                   WHERE email = @email",
                     conn);
 
                 updateCmd.Parameters.AddWithValue("newToken", resetToken);
                 updateCmd.Parameters.AddWithValue("email", request.Email);
+                updateCmd.Parameters.AddWithValue("created", DateTime.UtcNow);
 
                 await updateCmd.ExecuteNonQueryAsync();
 
@@ -413,10 +416,11 @@ namespace CallXApi
                     {
                         var insertCmd = new NpgsqlCommand(
                             @"INSERT INTO forgot_password_otps (email, token, created) 
-                          VALUES (@email, @otp, NOW())",
+                          VALUES (@email, @otp, @created)",
                             conn, tx);
                         insertCmd.Parameters.AddWithValue("email", request.Email);
                         insertCmd.Parameters.AddWithValue("otp", otp);
+                        insertCmd.Parameters.AddWithValue("created", DateTime.UtcNow);
                         await insertCmd.ExecuteNonQueryAsync();
                     }
 
