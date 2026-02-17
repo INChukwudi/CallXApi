@@ -649,7 +649,14 @@ public class PasswordObj
 
 public class ForgotPasswordObj
 {
+     /// <summary>
+    /// New password for the user
+    /// </summary>
     public string? password { get; set; }
+
+    /// <summary>
+    /// Email of the user
+    /// </summary>
     public string? email { get; set; }
 }
 

@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CallXApi</name>
+    </assembly>
+    <members>
+        <member name="T:CallXApi.AccountController">
+            <summary>
+            Manages Account
+            </summary>
+        </member>
+        <member name="M:CallXApi.AccountController.UpdateUserPassword(ForgotPasswordObj)">
+            <summary>
+            Updates a user's password
+            </summary>
+            
+            <param name="studentId">Unique identifier of the student</param>
+            <param name="subjectId">Unique identifier of the subject</param>
+            <param name="term">Academic term</param>
+            <returns>Student result record</returns>
+        </member>
+        <member name="T:CallXApi.Migrations.Init">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.Report">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Report.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Report.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.Report.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.reportdesc">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.reportdesc.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.reportdesc.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.reportdesc.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.operator">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.operator2">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator2.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator2.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.operator2.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.meeting">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.meeting.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.meeting.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.meeting.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.call">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.call.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.call.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.call.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.log">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.log.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.log.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.log.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.usere">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.usere.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.usere.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.usere.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.wes">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.wes.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.wes.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.wes.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CallXApi.Migrations.vice">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.vice.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.vice.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CallXApi.Migrations.vice.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="P:ForgotPasswordObj.password">
+            <summary>
+            New password for the user
+            </summary>
+        </member>
+        <member name="P:ForgotPasswordObj.email">
+            <summary>
+            Email of the user
+            </summary>
+        </member>
+    </members>
+</doc>

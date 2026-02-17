@@ -21,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace CallXApi
 {
+    /// <summary>
+    /// Manages Account
+    /// </summary>
     // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class AccountController : ControllerBase
@@ -91,20 +94,15 @@ namespace CallXApi
                 using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
                 {
                     await conn.OpenAsync();
-                    if (await _account.CheckUser(creds.email) > 0)
+                    if (await _account.CheckUser(creds.phone) > 0)
                     {
-                        var user = await _account.Authenticate(creds.email, creds.password);
-
-                        if (user == null)
-                        {
-                            return Ok(new UserToken { code = 2 });
-                        }
+                        var user = await _account.AuthenticatePhone(creds.phone);
                         //await UpdateLastLogin(myId);
                         await _account.UpdateUserLastLogin(Convert.ToInt32(user.id));
                         await LogUserActivityById("Logged in", Convert.ToInt32(user.id));
                         return Ok(user);
                     }
-                    return Ok(new UserToken { code = 3 });
+                    return Ok(new UserToken { code = 3, status = "phone number not registered" });
                 }
             }
             catch (Exception ex)
@@ -143,7 +141,44 @@ namespace CallXApi
         //}
 
 
-        [HttpPost("Register")]
+        // [HttpPost("Register")]
+        // public async Task<IActionResult> Register([FromBody] Register model)
+        // {
+        //     try
+        //     {
+        //         int? myuserId;
+        //             using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
+        //             {
+        //                 await conn.OpenAsync();
+        //                 var mycheck = await _account.CheckUser(model.email);
+        //                 if (mycheck > 0)
+        //                 {
+        //                     return BadRequest(new { message = "This email has already been registered!" });
+        //                 }
+
+        //                 string query = @"INSERT INTO users (username, password, created, status) 
+        //                VALUES(@username, @password, @created, @status)";
+
+        //                 NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
+        //                 cmd.Parameters.AddWithValue("@username", model.email.Trim());
+        //                 cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
+        //                 cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
+        //                 cmd.Parameters.AddWithValue("@status", "ACTIVE");
+
+        //                 await cmd.ExecuteNonQueryAsync();
+
+        //                 myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
+
+        //             }
+        //             return Ok(_account.AuthReg(myuserId));
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return BadRequest(new { message = ex.Message });
+        //     }
+        // }
+
+         [HttpPost("Register")]
         public async Task<IActionResult> Register([FromBody] Register model)
         {
             try
@@ -155,26 +190,26 @@ namespace CallXApi
                     using (NpgsqlConnection conn = new NpgsqlConnection(myConnectString))
                     {
                         await conn.OpenAsync();
-                        var mycheck = await _account.CheckUser(model.email);
+                        var mycheck = await _account.CheckUser(model.phone);
                         if (mycheck > 0)
                         {
-                            return BadRequest(new { message = "This email has already been registered!" });
+                            return BadRequest(new { message = "This phone number has already been registered!" });
                         }
 
-                        string query = @"INSERT INTO users (username, password, created, status) 
-                       VALUES(@username, @password, @created, @status)";
+                        string query = @"INSERT INTO users (username, name, created, status) 
+                       VALUES(@username, @name, @created, @status)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                         //cmd.Parameters.AddWithValue("@Username", model.userName);
-                        cmd.Parameters.AddWithValue("@username", model.email.Trim());
-                        cmd.Parameters.AddWithValue("@password", _account.Encrypt(model.password.Trim()));
+                        cmd.Parameters.AddWithValue("@username", model.phone.Trim());
+                        cmd.Parameters.AddWithValue("@name", model?.name?.Trim());
                         //cmd.Parameters.AddWithValue("@MemberId", model.memberId);
                         cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
                         cmd.Parameters.AddWithValue("@status", "ACTIVE");
 
                         await cmd.ExecuteNonQueryAsync();
 
-                        myuserId = await _account.GetUserIdRegister(model.email, model.password.Trim());
+                        myuserId = await _account.GetUserIdRegisterPhoneOnly(model.phone.Trim());
 
                     }
                     return Ok(_account.AuthReg(myuserId));
@@ -518,6 +553,14 @@ namespace CallXApi
         }
 
 
+        /// <summary>
+        /// Updates a user's password
+        /// </summary>
+        /// 
+        /// <param name="studentId">Unique identifier of the student</param>
+        /// <param name="subjectId">Unique identifier of the subject</param>
+        /// <param name="term">Academic term</param>
+        /// <returns>Student result record</returns>
 
         [HttpPost("UpdateUserPassword")]
         public async Task<IActionResult> UpdateUserPassword([FromForm] ForgotPasswordObj model)

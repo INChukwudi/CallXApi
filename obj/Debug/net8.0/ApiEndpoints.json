@@ -17,6 +17,38 @@
   },
   {
     "ContainingType": "CallXApi.AccountController",
+    "Method": "ForgetPasswordOtp",
+    "RelativePath": "api/Account/ForgetPasswordOtp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "OtpRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.AccountController",
+    "Method": "ForgetPasswordVerifyOtp",
+    "RelativePath": "api/Account/ForgetPasswordVerifyOtp",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "VerifyOtpRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.AccountController",
     "Method": "GetData",
     "RelativePath": "api/Account/GetData",
     "HttpMethod": "GET",
@@ -101,6 +133,27 @@
   },
   {
     "ContainingType": "CallXApi.AccountController",
+    "Method": "UpdateUserPassword",
+    "RelativePath": "api/Account/UpdateUserPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.AccountController",
     "Method": "VerifyOtp",
     "RelativePath": "api/Account/verify-otp",
     "HttpMethod": "POST",
@@ -111,6 +164,22 @@
         "Name": "request",
         "Type": "VerifyOtpRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CallXApi.ReportController",
+    "Method": "ActivateOperator",
+    "RelativePath": "api/Report/ActivateOperator",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "operatorId",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

@@ -156,8 +156,53 @@ namespace CallXApi.Models
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            UserToken tok = new UserToken { id = userId, token = tokenHandler.WriteToken(token), name = userdata.surname + " " + userdata.first_name, photo = userdata.passport };
+            UserToken tok = new UserToken { id = userId, token = tokenHandler.WriteToken(token), name = userdata?.name ?? "", photo = userdata?.passport ?? null, phone = userdata?.username ?? "" };
             return tok;
+        }
+
+
+         public async Task<UserToken> AuthenticatePhone(string username)
+        {
+            //var userId = await GetStaffId(username, password, schoolId);
+            var user = await GetUser(username);
+            //Staff mystaff = new Staff();
+
+            if ( user != null)
+            {
+                // var school = await GetUserSchool(user.SchoolId);
+                //if (user.role_id == 2)
+                //{
+                //    mystaff = await GetStaff(userId);
+                //}
+                // authentication successful so generate jwt token
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.id.ToString()),
+                        new Claim(ClaimTypes.Sid, ""),
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                };
+                var token = tokenHandler.CreateToken(tokenDescriptor);
+
+                UserToken tok;
+                //if (user.role_id == 1)
+                //{
+                    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = "ACTIVE", photo = user?.passport ?? null, name = user?.name ?? "", phone = username ?? "" };
+                //}
+                //else
+                //{
+                //    tok = new UserToken { id = user.id, token = tokenHandler.WriteToken(token), code = 1, status = user.role_id.ToString(), photo = user.photo, name = user.last_name + " " + user.first_name };
+                //}
+
+                return tok;
+            }
+            return null;
+
         }
 
         public async Task<UserToken> Authenticate(string username, string password)
@@ -264,11 +309,25 @@ namespace CallXApi.Models
             return user.password == encryptedPassword ? user.id : 0;
         }
 
-        public async Task<user> VerifyPassword(string email, string password)
+        public async Task<int> GetUserIdRegisterPhoneOnly(string phone)
+        {
+            var user = await (from a in _context.users where a.username == phone select a).FirstOrDefaultAsync();
+            return user != null ? user.id : 0;
+        }
+
+        public async Task<user> VerifyPassword(string phone, string password)
         {
             var encryptedPassword = Encrypt(password);
-            var user = await (from a in _context.users where a.username == email select a).FirstOrDefaultAsync();
+            var user = await (from a in _context.users where a.username == phone select a).FirstOrDefaultAsync();
             return user.password == encryptedPassword ? user : null;
+        }
+
+         public async Task<user> GetUser(string phone)
+        {
+            //var encryptedPassword = Encrypt(password);
+            var user = await (from a in _context.users where a.username == phone select a).FirstOrDefaultAsync();
+            return user;
+            //return user.password == encryptedPassword ? user : null;
         }
 
         public async Task<admin_user?> VerifyAdminPassword(string email, string password)
