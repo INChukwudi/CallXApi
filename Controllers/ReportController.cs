@@ -97,7 +97,7 @@ public async Task<IActionResult> GetAllReport()
             a.description,
             a.call_direction,
             passport = b.passport,
-            fullname = b.surname + " " + b.first_name,
+            fullname = b.name,
             email = b.username,
             a.network_type,
             a.state,
