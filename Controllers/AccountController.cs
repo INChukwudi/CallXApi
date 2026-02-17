@@ -101,8 +101,12 @@ namespace CallXApi
                         await _account.UpdateUserLastLogin(Convert.ToInt32(user.id));
                         await LogUserActivityById("Logged in", Convert.ToInt32(user.id));
                         return Ok(user);
+                    } else
+                    {
+                        var lof = await Register(new ViewModels.Register{name = creds?.name ?? "", phone = creds.phone});
+                        return lof;
                     }
-                    return Ok(new UserToken { code = 3, status = "phone number not registered" });
+                    
                 }
             }
             catch (Exception ex)
@@ -178,8 +182,8 @@ namespace CallXApi
         //     }
         // }
 
-         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] Register model)
+    
+        private async Task<IActionResult> Register(Register model)
         {
             try
             {
@@ -212,7 +216,7 @@ namespace CallXApi
                         myuserId = await _account.GetUserIdRegisterPhoneOnly(model.phone.Trim());
 
                     }
-                    return Ok(_account.AuthReg(myuserId));
+                    return Ok(await _account.AuthReg(myuserId));
                 //}
                 //else
                 //{

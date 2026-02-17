@@ -79,37 +79,6 @@
         }
       }
     },
-    "/api/Account/Register": {
-      "post": {
-        "tags": [
-          "Account"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Register"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Register"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Register"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Account/RegisterAdmin": {
       "post": {
         "tags": [
@@ -791,6 +760,10 @@
           "password": {
             "type": "string",
             "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -799,24 +772,6 @@
         "type": "object",
         "properties": {
           "email": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Register": {
-        "type": "object",
-        "properties": {
-          "phone": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "name": {
             "type": "string",
             "nullable": true
           }
