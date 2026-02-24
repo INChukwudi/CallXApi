@@ -200,14 +200,14 @@ namespace CallXApi
                             return BadRequest(new { message = "This phone number has already been registered!" });
                         }
 
-                        string query = @"INSERT INTO users (username, name, created, status, gender) 
-                       VALUES(@username, @name, @created, @status, @gender)";
+                        string query = @"INSERT INTO users (username, name, created, status, sex) 
+                       VALUES(@username, @name, @created, @status, @sex)";
 
                         NpgsqlCommand cmd = new NpgsqlCommand(query, conn);
                         //cmd.Parameters.AddWithValue("@Username", model.userName);
                         cmd.Parameters.AddWithValue("@username", model.phone.Trim());
                         cmd.Parameters.AddWithValue("@name", model?.name?.Trim());
-                        cmd.Parameters.AddWithValue("@gender", model?.gender?.Trim());
+                        cmd.Parameters.AddWithValue("@sex", model?.gender?.Trim());
                         cmd.Parameters.AddWithValue("@created", DateTime.UtcNow);
                         cmd.Parameters.AddWithValue("@status", "ACTIVE");
 
