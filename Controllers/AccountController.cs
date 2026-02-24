@@ -103,7 +103,7 @@ namespace CallXApi
                         return Ok(user);
                     } else
                     {
-                        var lof = await Register(new ViewModels.Register{name = creds?.name ?? "", phone = creds.phone});
+                        var lof = await Register(new ViewModels.Register{name = creds?.name ?? "", phone = creds.phone, gender = creds?.gender});
                         return lof;
                     }
                     
