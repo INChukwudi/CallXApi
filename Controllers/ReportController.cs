@@ -65,7 +65,35 @@ namespace CallXApi
         [HttpGet("GetReportById")]
         public async Task<IActionResult> GetReportById(int id)
         {
-            var record = await _context.network_reports.FindAsync(id);
+            //var record = await _context.network_reports.FindAsync(id);
+            var record = await (
+        from a in _context.network_reports
+        join b in _context.users on a.user_id equals b.id
+        where a.id == id
+        select new
+        {
+            a.id,
+            a.datetime_recorded,
+            a.experience_type,
+            a.report_category,
+            a.network_provider,
+            a.location,
+            a.environment,
+            a.rating,
+            a.client_network_provider,
+            a.user_id,
+            a.client_network_digits,
+            a.description,
+            a.call_direction,
+            passport = b.passport,
+            fullname = b.name,
+            email = b.username,
+            a.network_type,
+            a.state,
+            a.device_model,
+            gender = b.sex
+        }
+    ).FirstOrDefaultAsync();
 
             if (record == null)
                 return NotFound(new { error = "Record not found" });
@@ -101,13 +129,66 @@ public async Task<IActionResult> GetAllReport()
             email = b.username,
             a.network_type,
             a.state,
-            a.device_model
+            a.device_model,
+            gender = b.sex
         }
     ).ToListAsync();
 
    // await this.LogAdminActivity("Viewed Reports");
 
     return Ok(data);
+}
+
+
+[HttpGet("GetAllReportByPage")]
+public async Task<IActionResult> GetAllReportByPage(int pgi = 1, int size = 10)
+{
+    // Ensure the page number is at least 1
+    if (pgi < 1) pgi = 1;
+
+    var query = from a in _context.network_reports
+                join b in _context.users on a.user_id equals b.id
+                orderby a.datetime_recorded descending // Usually better to see newest first
+                select new
+                {
+                    a.id,
+                    a.datetime_recorded,
+                    a.experience_type,
+                    a.report_category,
+                    a.network_provider,
+                    a.location,
+                    a.environment,
+                    a.rating,
+                    a.client_network_provider,
+                    a.user_id,
+                    a.client_network_digits,
+                    a.description,
+                    a.call_direction,
+                    passport = b.passport,
+                    fullname = b.name,
+                    email = b.username,
+                    a.network_type,
+                    a.state,
+                    a.device_model,
+                    gender = b.sex
+                };
+
+    // Calculate total count before skipping (useful for frontend UI)
+    var totalRecords = await query.CountAsync();
+
+    var data = await query
+        .Skip((pgi - 1) * size)
+        .Take(size)
+        .ToListAsync();
+
+    // Returning metadata helps the frontend manage buttons/sliders
+    return Ok(new 
+    { 
+        TotalRecords = totalRecords,
+        PageNumber = pgi,
+        PageSize = size,
+        Data = data 
+    });
 }
 
 
